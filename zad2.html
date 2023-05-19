@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightway</title>
+    <style>
+        .trafic-light {
+            width: 100px;
+            height: 110px;
+            margin-bottom: 12px;
+            border-radius: 50%;
+            border: 1px solid black;
+        }
+        .red {
+            background-color: red;
+
+        }
+        .yellow {
+            background-color: yellow;
+        }
+        .green{
+            background-color: green;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="trafic-light red"></div>
+    <div class="trafic-light yellow"></div>
+    <div class="trafic-light green"></div>
+    
+    <script>
+        
+    
+        
+        function changeLightColor(lightElement, color) {
+          const trafficLight = document.querySelector(lightElement);
+          trafficLight.className = 'traffic-light ' + color;
+        }
+    
+      
+        function simulateTrafficLights() {
+          setTimeout(function() {
+            changeLightColor('.red', 'red');
+            changeLightColor('.yellow', 'gray');
+            changeLightColor('.green', 'gray');
+    
+            setTimeout(function() {
+              changeLightColor('.red', 'gray');
+              changeLightColor('.yellow', 'yellow');
+              changeLightColor('.green', 'gray');
+    
+              setTimeout(function() {
+                changeLightColor('.red', 'gray');
+                changeLightColor('.yellow', 'gray');
+                changeLightColor('.green', 'green');
+    
+                setTimeout(simulateTrafficLights, 2000); 
+              }, 2000);
+            }, 2000);
+          }, 2000);
+        }
+    
+        
+        window.onload = simulateTrafficLights;
+      </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formularz rejestracyjny</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formularz rejestracyjny</h1>
+    <form id="registrationForm">
+        <div>
+            <label for="login">Login:</label>
+            <input type="text" id="login" name="login" required minlength="3">
+            <span id="loginError" class="error"></span>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <span id="emailError" class="error"></span>
+        </div>
+        <div>
+            <label for="password">Hasło:</label>
+            <input type="password" id="password" name="password" required>
+            <span id="passwordError" class="error"></span>
+        </div>
+        <div>
+            <label for="confirmPassword">Powtórz hasło:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <span id="confirmPasswordError" class="error"></span>
+        </div>
+        <div>
+            <input type="checkbox" id="additionalInfo" name="additionalInfo">
+            <label for="additionalInfo">Dodatkowe informacje</label>
+        </div>
+        <div id="additionalFields" style="display: none;">
+            <div>
+                <label for="phone">Telefon:</label>
+                <input type="text" id="phone" name="phone" pattern="[0-9]*">
+                <span id="phoneError" class="error"></span>
+            </div>
+            <div>
+                <label for="birthdate">Data urodzenia:</label>
+                <input type="date" id="birthdate" name="birthdate">
+                <span id="birthdateError" class="error"></span>
+            </div>
+        </div>
+        <div>
+            <button type="submit">Zarejestruj się</button>
+        </div>
+    </form>
+
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>Login</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody id="userTableBody">
+        </tbody>
+    </table>
+
+    <script>
+        const registrationForm = document.getElementById('registrationForm');
+        const loginInput = document.getElementById('login');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const additionalInfoCheckbox = document.getElementById('additionalInfo');
+        const additionalFields = document.getElementById('additionalFields');
+        const phoneInput = document.getElementById('phone');
+        const birthdateInput = document.getElementById('birthdate');
+        const userTableBody = document.getElementById('userTableBody');
+
+        registrationForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            if (validateForm()) {
+                addUserToTable();
+                registrationForm.reset();
+                additionalFields.style.display = 'none';
+            }
+        });
+
+        additionalInfoCheckbox.addEventListener('change', function () {
+            additionalFields.style.display = this.checked ? 'block' : 'none';
+        });
+
+        function validateForm() {
+            clearErrors();
+        }
+    </script>
+</body>
+</html>
